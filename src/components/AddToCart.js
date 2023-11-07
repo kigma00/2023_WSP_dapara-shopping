@@ -1,8 +1,8 @@
-"use client"
-import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useRouter } from "next/navigation"
-import { addToCart } from "@/redux/slices/cartSlice"
+'use client'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation'
+import { addToCart } from '@/redux/slices/cartSlice'
 
 export default function AddToCart({
   product,
@@ -23,12 +23,12 @@ export default function AddToCart({
         if (existItem.qty + 1 <= product.countInStock) {
           newQty = existItem.qty + 1
         } else {
-          return alert("No more product exist")
+          return alert('No more product exist')
         }
       }
     }
     dispatch(addToCart({ ...product, qty: newQty }))
-    if (redirect) router.push("/cart")
+    if (redirect) router.push('/cart')
   }
 
   return (
@@ -46,7 +46,7 @@ export default function AddToCart({
                   {x + 1}
                 </option>
               ))}
-            </select>{" "}
+            </select>{' '}
           </div>
         </div>
       )}

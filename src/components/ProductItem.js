@@ -1,7 +1,7 @@
-import Link from "next/link"
-import Image from "next/image"
-import ProductRate from "./ProduxtRate"
-import AddToCart from "./AddToCart"
+import Link from 'next/link'
+import Image from 'next/image'
+import ProductRate from './ProductRate'
+import AddToCart from './AddToCart'
 
 export default function ProductItem({ product }) {
   return (

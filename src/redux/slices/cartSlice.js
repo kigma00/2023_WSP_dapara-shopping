@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit"
-import Cookies from "js-cookie"
+import { createSlice } from '@reduxjs/toolkit'
+import Cookies from 'js-cookie'
 
-const initialState = Cookies.get("cart")
-  ? { ...JSON.parse(Cookies.get("cart")), loading: true }
+const initialState = Cookies.get('cart')
+  ? { ...JSON.parse(Cookies.get('cart')), loading: true }
   : {
       loading: true,
       cartItems: [],
       shippingAddress: {},
-      paymentMethod: "",
+      paymentMethod: '',
     }
 
 const addDecimals = (num) => {
@@ -15,7 +15,7 @@ const addDecimals = (num) => {
 }
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
@@ -38,7 +38,8 @@ const cartSlice = createSlice({
           Number(state.shippingPrice) +
           Number(state.taxPrice)
       )
-      Cookies.set("cart", JSON.stringify(state))
+
+      Cookies.set('cart', JSON.stringify(state))
     },
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter((x) => x.id !== action.payload)
@@ -52,13 +53,22 @@ const cartSlice = createSlice({
           Number(state.shippingPrice) +
           Number(state.taxPrice)
       )
-      Cookies.set("cart", JSON.stringify(state))
+      Cookies.set('cart', JSON.stringify(state))
+    },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload
+      Cookies.set('cart', JSON.stringify(state))
+    },
+    savePaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload
+      Cookies.set('cart', JSON.stringify(state))
     },
     hideLoading: (state) => {
       state.loading = false
     },
   },
 })
+
 export const {
   addToCart,
   removeFromCart,
@@ -66,4 +76,5 @@ export const {
   savePaymentMethod,
   hideLoading,
 } = cartSlice.actions
+
 export default cartSlice.reducer
